@@ -7,6 +7,11 @@ import VideoList from "./VideoList"
 
 class App extends React.Component{
     state={videos:[],selectedVideo:null}
+
+
+    componentDidMount(){
+        this.onTermSubmit("buildings")
+    }
     onTermSubmit= async term => {
         //async api request
         //youtube is now a pre-configured instance of axios
@@ -21,7 +26,10 @@ class App extends React.Component{
         console.log(response)
         
         //take the list of vdos and set them as state on our App component
-        this.setState({videos:response.data.items})
+        this.setState({
+            videos:response.data.items,
+            selectedVideo:response.data.items[0]
+        })
     }
 //obj that we fetch from the u tube api:video
     onVideoSelect=video=>{
